@@ -13,7 +13,7 @@ class RestaurantServiceTest {
     List<Item> itemsInMenu = new ArrayList<Item>();
 
     RestaurantService service = new RestaurantService();
-    Restaurant restaurant;
+    Restaurant restaurant ;
 
     public void adding_test_details_of_restaurants(){
         restaurant = service.addRestaurant("Amelie's cafe","chennai",LocalTime.parse("10:30:00"),LocalTime.parse("22:00:00"));
@@ -76,23 +76,23 @@ class RestaurantServiceTest {
     public void order_value_should_get_cumulative_total_when_collection_of_items_selected(){
         adding_test_details_of_restaurants();
         itemsInMenu = restaurant.getMenu();
-        assertEquals(388,restaurant.displayOrderTotal(itemsInMenu));
+        assertEquals(388,service.displayOrderTotal(itemsInMenu));
     }
 
     @Test
     public void order_value_should_reduce_cumulative_total_when_an_item_removed(){
         adding_test_details_of_restaurants();
         itemsInMenu = restaurant.getMenu();
-        int total = restaurant.displayOrderTotal(itemsInMenu);
+        int total = service.displayOrderTotal(itemsInMenu);
         int afterTotal = itemsInMenu.get(1).getPrice();
         itemsInMenu.remove(1);
-        assertEquals(total-afterTotal,restaurant.displayOrderTotal(itemsInMenu));
+        assertEquals(total-afterTotal,service.displayOrderTotal(itemsInMenu));
     }
 
     @Test
     public void failing_case_order_value_should_get_cumulative_total_when_collection_of_items_selected(){
         adding_test_details_of_restaurants();
         itemsInMenu = restaurant.getMenu();
-        assertEquals(504,restaurant.displayOrderTotal(itemsInMenu));
+        assertEquals(504,service.displayOrderTotal(itemsInMenu));
     }
 }
