@@ -4,8 +4,13 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
+import java.util.List;
 
 class RestaurantServiceTest {
+
+    List<Item> itemsInMenu = new ArrayList<Item>();
 
     RestaurantService service = new RestaurantService();
     Restaurant restaurant;
@@ -66,4 +71,28 @@ class RestaurantServiceTest {
         assertEquals(initialNumberOfRestaurants + 1,service.getRestaurants().size());
     }
     //<<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    @Test
+    public void order_value_should_get_cumulative_total_when_collection_of_items_selected(){
+        adding_test_details_of_restaurants();
+        itemsInMenu = restaurant.getMenu();
+        assertEquals(388,restaurant.displayOrderTotal(itemsInMenu));
+    }
+
+    @Test
+    public void order_value_should_reduce_cumulative_total_when_an_item_removed(){
+        adding_test_details_of_restaurants();
+        itemsInMenu = restaurant.getMenu();
+        int total = restaurant.displayOrderTotal(itemsInMenu);
+        int afterTotal = itemsInMenu.get(1).getPrice();
+        itemsInMenu.remove(1);
+        assertEquals(total-afterTotal,restaurant.displayOrderTotal(itemsInMenu));
+    }
+
+    @Test
+    public void failing_case_order_value_should_get_cumulative_total_when_collection_of_items_selected(){
+        adding_test_details_of_restaurants();
+        itemsInMenu = restaurant.getMenu();
+        assertEquals(504,restaurant.displayOrderTotal(itemsInMenu));
+    }
 }
