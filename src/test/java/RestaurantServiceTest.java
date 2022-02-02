@@ -72,6 +72,7 @@ class RestaurantServiceTest {
     }
     //<<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    //>>>>>>>>>>>>>>>>>>>>>>ORDER VALUE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test
     public void order_value_should_get_cumulative_total_when_collection_of_items_selected(){
         adding_test_details_of_restaurants();
@@ -95,4 +96,6 @@ class RestaurantServiceTest {
         itemsInMenu = restaurant.getMenu();
         assertEquals(504,service.displayOrderTotal(itemsInMenu));
     }
+
+    //<<<<<<<<<<<<<<<<<<<<ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
